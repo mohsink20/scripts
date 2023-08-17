@@ -3,10 +3,12 @@
 #include <string.h>
 #include <unistd.h>
 
-void run_nmap_recon(const char *ip_address)
+void run_nmap_recon(char *ip_address)
 {
     char *args[] = {"nmap", "-sS", "-sCV", "-A", "-T4", "--script=default,vuln,safe",
-                    "--top-ports=1000", "-p-", ip_address, NULL};
+                    "--top-ports=1000", "-p-", NULL, NULL};
+
+	args[9] = ip_address;
 
     printf("Running Nmap Reconnaissance:\n");
     FILE *output_file = fopen("nmap_log.txt", "w");
